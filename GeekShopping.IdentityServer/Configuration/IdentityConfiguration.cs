@@ -1,5 +1,6 @@
 ﻿using Duende.IdentityServer;
 using Duende.IdentityServer.Models;
+using System.Collections.Generic;
 
 namespace GeekShopping.IdentityServer.Configuration
 {
@@ -7,7 +8,7 @@ namespace GeekShopping.IdentityServer.Configuration
     {
         //Papers 
         public const string Admin = "Admin";
-        public const string Customer = "Customer";
+        public const string Client = "Client";
 
         //IdentityResources - Claim group names
         public static IEnumerable<IdentityResource> IdentityResources =>
@@ -42,8 +43,8 @@ namespace GeekShopping.IdentityServer.Configuration
                     ClientId = "geek_shopping",
                     ClientSecrets = { new Secret("nigt@c#52489700".Sha256())},
                     AllowedGrantTypes = GrantTypes.Code,
-                    RedirectUris = {"http://localhost:19818/signin-oidc"},
-                    PostLogoutRedirectUris = {"http://localhost:19818/signout-callback-oidc"},
+                    RedirectUris = {"https://localhost:4430/signin-oidc"},
+                    PostLogoutRedirectUris = {"https://localhost:4430/signout-callback-oidc"},
                     AllowedScopes = new List<string>
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
