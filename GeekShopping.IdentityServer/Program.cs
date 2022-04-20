@@ -20,7 +20,7 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<MySqlIdentityServerContext>()
     .AddDefaultTokenProviders();
 
-var build = builder.Services.AddIdentityServer(options =>
+builder.Services.AddIdentityServer(options =>
 {
     options.Events.RaiseErrorEvents = true;
     options.Events.RaiseInformationEvents = true;
@@ -30,9 +30,9 @@ var build = builder.Services.AddIdentityServer(options =>
 }).AddInMemoryIdentityResources(IdentityConfiguration.IdentityResources)
   .AddInMemoryApiScopes(IdentityConfiguration.ApiScopes)
   .AddInMemoryClients(IdentityConfiguration.Clients)
-  .AddAspNetIdentity<ApplicationUser>();
+  .AddAspNetIdentity<ApplicationUser>()
+  .AddDeveloperSigningCredential();
 
-build.AddDeveloperSigningCredential();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
