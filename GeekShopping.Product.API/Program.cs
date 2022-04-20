@@ -13,14 +13,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-//builder.Services.AddDbContext<MySqlContext>(options =>
-//{
-//    options.UseMySql(builder.Configuration.GetConnectionString("MySqlConnectionString"), new MySqlServerVersion(new Version(6, 2, 4)));
-//});
-
 builder.Services.AddDbContext<MySqlContext>(options =>
 {
-    options.UseMySql(@"Server=localhost;Port=3306;Database=geekShopping_product_api;Uid=root;Pwd=Nigt@c#52489700", new MySqlServerVersion(new Version(6, 2, 4)));
+    options.UseMySql(builder.Configuration.GetConnectionString("GeekShoppingProductAPIConnection"), new MySqlServerVersion(new Version(6, 2, 4)));
 });
 
 IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
