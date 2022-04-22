@@ -1,6 +1,5 @@
 ﻿using Duende.IdentityServer;
 using Duende.IdentityServer.Models;
-using System.Collections.Generic;
 
 namespace GeekShopping.IdentityServer.Configuration
 {
@@ -55,8 +54,5 @@ namespace GeekShopping.IdentityServer.Configuration
                 },
 
             };
-
-
-
     }
 }

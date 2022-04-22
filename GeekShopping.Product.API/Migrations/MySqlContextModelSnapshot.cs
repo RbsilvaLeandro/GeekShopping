@@ -15,7 +15,7 @@ namespace GeekShopping.Product.API.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.4")
+                .HasAnnotation("ProductVersion", "6.0.1")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("GeekShopping.Product.API.Model.Products", b =>
@@ -24,6 +24,10 @@ namespace GeekShopping.Product.API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
                         .HasColumnName("id");
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("tinyint(1)")
+                        .HasColumnName("active");
 
                     b.Property<string>("Category")
                         .IsRequired()
@@ -61,6 +65,7 @@ namespace GeekShopping.Product.API.Migrations
                         new
                         {
                             id = 1L,
+                            Active = false,
                             Category = "T-shirt",
                             Description = "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout",
                             ImageUrl = "https://github.com/leandrocgsi/erudio-microservices-dotnet6/blob/main/ShoppingImages/13_dragon_ball.jpg",
@@ -70,6 +75,7 @@ namespace GeekShopping.Product.API.Migrations
                         new
                         {
                             id = 2L,
+                            Active = false,
                             Category = "T-shirt",
                             Description = "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout",
                             ImageUrl = "https://github.com/leandrocgsi/erudio-microservices-dotnet6/blob/main/ShoppingImages/2_no_internet.jpg?raw=true",
@@ -79,6 +85,7 @@ namespace GeekShopping.Product.API.Migrations
                         new
                         {
                             id = 3L,
+                            Active = false,
                             Category = "Action Figure",
                             Description = "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout",
                             ImageUrl = "https://github.com/leandrocgsi/erudio-microservices-dotnet6/blob/main/ShoppingImages/3_vader.jpg?raw=true",
@@ -88,6 +95,7 @@ namespace GeekShopping.Product.API.Migrations
                         new
                         {
                             id = 4L,
+                            Active = false,
                             Category = "Action Figure",
                             Description = "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout",
                             ImageUrl = "https://github.com/leandrocgsi/erudio-microservices-dotnet6/blob/main/ShoppingImages/4_storm_tropper.jpg?raw=true",
@@ -97,6 +105,7 @@ namespace GeekShopping.Product.API.Migrations
                         new
                         {
                             id = 5L,
+                            Active = false,
                             Category = "T-shirt",
                             Description = "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout",
                             ImageUrl = "https://github.com/leandrocgsi/erudio-microservices-dotnet6/blob/main/ShoppingImages/5_100_gamer.jpg?raw=true",
@@ -106,6 +115,7 @@ namespace GeekShopping.Product.API.Migrations
                         new
                         {
                             id = 6L,
+                            Active = false,
                             Category = "T-shirt",
                             Description = "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout",
                             ImageUrl = "https://github.com/leandrocgsi/erudio-microservices-dotnet6/blob/main/ShoppingImages/6_spacex.jpg?raw=true",
@@ -115,6 +125,7 @@ namespace GeekShopping.Product.API.Migrations
                         new
                         {
                             id = 7L,
+                            Active = false,
                             Category = "T-shirt",
                             Description = "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout",
                             ImageUrl = "https://github.com/leandrocgsi/erudio-microservices-dotnet6/blob/main/ShoppingImages/7_coffee.jpg?raw=true",
@@ -124,6 +135,7 @@ namespace GeekShopping.Product.API.Migrations
                         new
                         {
                             id = 8L,
+                            Active = false,
                             Category = "Sweatshirt",
                             Description = "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout",
                             ImageUrl = "https://github.com/leandrocgsi/erudio-microservices-dotnet6/blob/main/ShoppingImages/8_moletom_cobra_kay.jpg?raw=true",
@@ -133,6 +145,7 @@ namespace GeekShopping.Product.API.Migrations
                         new
                         {
                             id = 9L,
+                            Active = false,
                             Category = "Book",
                             Description = "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout",
                             ImageUrl = "https://github.com/leandrocgsi/erudio-microservices-dotnet6/blob/main/ShoppingImages/9_neil.jpg?raw=true",
@@ -142,6 +155,7 @@ namespace GeekShopping.Product.API.Migrations
                         new
                         {
                             id = 10L,
+                            Active = false,
                             Category = "Action Figure",
                             Description = "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout",
                             ImageUrl = "https://github.com/leandrocgsi/erudio-microservices-dotnet6/blob/main/ShoppingImages/10_milennium_falcon.jpg?raw=true",
@@ -151,6 +165,7 @@ namespace GeekShopping.Product.API.Migrations
                         new
                         {
                             id = 11L,
+                            Active = false,
                             Category = "T-shirt",
                             Description = "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout",
                             ImageUrl = "https://github.com/leandrocgsi/erudio-microservices-dotnet6/blob/main/ShoppingImages/11_mars.jpg?raw=true",
@@ -160,6 +175,7 @@ namespace GeekShopping.Product.API.Migrations
                         new
                         {
                             id = 12L,
+                            Active = false,
                             Category = "T-shirt",
                             Description = "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout",
                             ImageUrl = "https://github.com/leandrocgsi/erudio-microservices-dotnet6/blob/main/ShoppingImages/12_gnu_linux.jpg?raw=true",
@@ -169,6 +185,7 @@ namespace GeekShopping.Product.API.Migrations
                         new
                         {
                             id = 13L,
+                            Active = false,
                             Category = "T-shirt",
                             Description = "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout",
                             ImageUrl = "https://github.com/leandrocgsi/erudio-microservices-dotnet6/blob/main/ShoppingImages/12_gnu_linux.jpg?raw=true",
