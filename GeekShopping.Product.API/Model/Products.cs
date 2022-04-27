@@ -1,12 +1,15 @@
-﻿using GeekShopping.Product.API.Model.Base;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GeekShopping.Product.API.Model
 {
     [Table("product")]
-    public class Products : BaseEntity
+    public class Products
     {
+        [Key]
+        [Column("id")]
+        public long id { get; set; }
+
         [Column("name")]
         [Required]
         [StringLength(150)]
