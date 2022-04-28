@@ -55,7 +55,7 @@ namespace GeekShopping.Web.Services
         public async Task<bool> DeleteById(long id, string token)
         {
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-            var response = await _httpClient.DeleteAsync($"{BasePath}/{id}");
+            var response = await _httpClient.DeleteAsync($"{BasePath}?id={id}");
 
             if (response.IsSuccessStatusCode)
                 return await response.ReadContentAs<bool>();

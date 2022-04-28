@@ -55,7 +55,7 @@ namespace GeekShopping.Product.API.Controllers
             return Ok(product);
         }
 
-        [Authorize(Roles = Role.Admin)]
+        //[Authorize(Roles = Role.Admin)]
         [HttpDelete]
         public async Task<ActionResult> Delete(long id)
         {
