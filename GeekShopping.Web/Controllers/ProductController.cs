@@ -66,7 +66,7 @@ namespace GeekShopping.Web.Controllers
             return View(product);
         }
 
-        //[Authorize]
+        [Authorize]
         public async Task<IActionResult> ProductDelete(int id)
         {
             var token = await HttpContext.GetTokenAsync("access_token");
