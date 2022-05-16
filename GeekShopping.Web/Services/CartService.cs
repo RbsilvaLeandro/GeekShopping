@@ -65,7 +65,7 @@ namespace GeekShopping.Web.Services
             if (response.IsSuccessStatusCode)
                 return await response.ReadContentAs<CartHeaderViewModel>();
             else throw new Exception("Something went wrong when calling API");
-        }
+        }       
 
         public async Task<bool> ClearCart(string userId, string token)
         {

@@ -1,5 +1,6 @@
 ﻿using GeekShopping.Cart.API.Data.ValueObjects;
 using GeekShopping.Cart.API.Messages;
+using GeekShopping.Cart.API.RabbitMqSender;
 using GeekShopping.Cart.API.Repository;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,17 +11,21 @@ namespace GeekShopping.Cart.API.Controllers
     public class CartShoppingController : ControllerBase
     {
         private ICartShoppingRepository _repository;
+        private IRabbitMqMessageSender _rabbitMQMessageSender;
 
-        public CartShoppingController(ICartShoppingRepository repository)
+        public CartShoppingController(ICartShoppingRepository repository, IRabbitMqMessageSender rabbitMQMessageSender)
         {
             _repository = repository ?? throw new
                 ArgumentNullException(nameof(repository));
+
+            _rabbitMQMessageSender = rabbitMQMessageSender
+                           ?? throw new ArgumentNullException(nameof(rabbitMQMessageSender));
         }
 
         [HttpGet("FindCart/{id}")]
-        public async Task<ActionResult<CartShoppingVO>> FindById(string Id)
+        public async Task<ActionResult<CartShoppingVO>> FindById(string id)
         {
-            var cart = await _repository.FindCartByUserId(Id);
+            var cart = await _repository.FindCartByUserId(id);
             if (cart == null) return NotFound();
             return Ok(cart);
         }
@@ -64,15 +69,18 @@ namespace GeekShopping.Cart.API.Controllers
             if (!status) return NotFound();
             return Ok(status);
         }
+
         [HttpPost("checkout")]
         public async Task<ActionResult<CheckoutHeaderVO>> Checkout(CheckoutHeaderVO vo)
         {
+            if (vo?.UserId == null) return BadRequest();
             var cart = await _repository.FindCartByUserId(vo.UserId);
             if (cart == null) return NotFound();
             vo.CartDetails = cart.CartDetails;
             vo.DateTime = DateTime.Now;
 
-            //TASK RabbitMQ logic comes here!!!
+            //RabbitMQ logic comes here!!!
+            _rabbitMQMessageSender.SendMessage(vo, "checkoutqueue");
 
             return Ok(vo);
         }

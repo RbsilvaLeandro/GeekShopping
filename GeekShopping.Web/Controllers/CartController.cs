@@ -23,7 +23,8 @@ namespace GeekShopping.Web.Controllers
         [Authorize]
         public async Task<IActionResult> CartIndex()
         {
-            return View(await FindUserCart());
+            var data = await FindUserCart();
+            return View(data);
         }
 
         [HttpPost("ApplyCoupon")]
@@ -106,21 +107,22 @@ namespace GeekShopping.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Checkout()
         {
-            return View(await FindUserCart());
+            var data = await FindUserCart();
+            return View(data);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Checkout(CartViewModel model)
+        public async Task<IActionResult> Checkout(CartViewModel vo)
         {
             var token = await HttpContext.GetTokenAsync("access_token");
 
-            var response = await _cartService.Checkout(model.CartHeader, token);
+            var response = await _cartService.Checkout(vo.CartHeader, token);
 
             if (response != null)
             {
                 return RedirectToAction(nameof(Confirmation));
             }
-            return View(model);
-        }
+            return View(vo);
+        }       
     }
 }

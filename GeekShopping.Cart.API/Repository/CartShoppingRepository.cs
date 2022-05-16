@@ -43,7 +43,11 @@ namespace GeekShopping.Cart.API.Repository
             cart.CartDetails = _context.CartDetails
                 .Where(c => c.CartHeaderId == cart.CartHeader.id)
                     .Include(c => c.Product);
-            return _mapper.Map<CartShoppingVO>(cart);
+                    //.Include(c => c.CartHeader);
+
+         
+            return _mapper.Map<CartShoppingVO>(cart);          
+           
         }
         
 

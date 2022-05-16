@@ -45,13 +45,13 @@ var app = builder.Build();
 
 var supportedCultures = new[]
     {
-        new CultureInfo("en-US")       
+        new CultureInfo("en-US")
     };
 
 app.UseRequestLocalization(new RequestLocalizationOptions
 {
-    DefaultRequestCulture = new RequestCulture("en-US"),  
-    SupportedCultures = supportedCultures,    
+    DefaultRequestCulture = new RequestCulture("en-US"),
+    SupportedCultures = supportedCultures,
     SupportedUICultures = supportedCultures
 });
 
