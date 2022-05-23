@@ -1,15 +1,12 @@
-using AutoMapper;
-using GeekShopping.Cart.API.Config;
-using GeekShopping.Cart.API.Model;
-using GeekShopping.Cart.API.RabbitMqSender;
-using GeekShopping.Cart.API.Repository;
+using GeekShopping.Order.API;
+using GeekShopping.Order.API.MessageConsumer;
+using GeekShopping.Order.API.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -20,17 +17,16 @@ builder.Services.AddDbContext<MySqlContext>(options =>
     options.UseMySql(builder.Configuration.GetConnectionString("GeekShoppingCartAPIConnection"), new MySqlServerVersion(new Version(6, 2, 4)));
 });
 
-IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
-builder.Services.AddSingleton(mapper);
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+var builderContext = new DbContextOptionsBuilder<MySqlContext>();
+builderContext.UseMySql(builder.Configuration.GetConnectionString("GeekShoppingCartAPIConnection"),
+            new MySqlServerVersion(
+                new Version(8, 0, 5)));
 
-builder.Services.AddScoped<ICartShoppingRepository, CartShoppingRepository>();
-builder.Services.AddScoped<IRabbitMqMessageSender, RabbitMqMessageSender>();
+builder.Services.AddSingleton(new OrderRepository(builderContext.Options));
 
-builder.Services.AddScoped<ICouponRepository, CouponRepository>();
-
-builder.Services.AddHttpClient<ICouponRepository, CouponRepository>(s => s.BaseAddress =
-                new Uri(builder.Configuration["ServiceUrls:CouponAPI"]));
+builder.Services.AddHostedService<RabbitMQCheckoutConsumer>();
+//builder.Services.AddScoped<ICartShoppingRepository, CartShoppingRepository>();
+//builder.Services.AddScoped<IRabbitMqMessageSender, RabbitMqMessageSender>();
 
 builder.Services.AddAuthentication("Bearer")
                 .AddJwtBearer("Bearer", options =>
